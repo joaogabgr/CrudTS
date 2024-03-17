@@ -12,6 +12,6 @@ export const Postagens = sequelize.define('postagens', {
     }
 });
 
-Postagens.belongsTo(Usuarios);
+Postagens.belongsTo(Usuarios, { as: 'usuario', foreignKey: 'usuarioId' });
 
 // Postagens.sync({ force: true })

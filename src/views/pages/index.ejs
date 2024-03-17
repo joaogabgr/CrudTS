@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2>Publicar:</h2>
+    <% if (usuarioID == undefined) { %>
+    <p>Logue para fazer uma publicação</p>
+    <a href="/logar">Logar</a>
+    <a href="/cadastrar">Cadastrar</a>
+    <% } else { %>
+    <form action="/publicar" method="post">
+        <input type="text" name="titulo">
+        <input type="text" name="mensagem" id="mensagem">
+        <button type="submit">Enviar</button>
+    </form>
+    <a href="/perfil">Perfil</a>
+    <% } %>
+    <h1>Publicações</h1>
+    <% publicacoes.forEach(e => { %>
+        <strong><p><%= e.titulo %></p></strong>
+        <p><%= e.mensagem %></p>
+        <p>Publicado por: <%= e.usuario.nome %></p>
+    <% }) %>
+</body>
+</html>

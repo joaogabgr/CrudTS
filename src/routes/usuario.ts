@@ -42,4 +42,9 @@ router.post('/logar', async (req, res) => {
     }
 })
 
+router.get('/deslogar', (req, res) => {
+    req.session.usuarioID = undefined;
+    res.redirect('/')
+})
+
 export default router;
