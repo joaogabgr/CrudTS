@@ -12,6 +12,8 @@
         <strong><p><%= e.titulo %></p></strong>
         <p><%= e.mensagem %></p>
         <p>Publicado por: <%= e.usuario.nome %></p>
+        <a href="/excluir/<%= e.id %>">Excluir</a>
+        <a href="/editar/<%= e.id %>">Editar</a>
     <% }) %>
 </body>
 </html>

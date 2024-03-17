@@ -23,4 +23,23 @@ router.post('/publicar', (req, res) => {
     })
 })
 
+router.get('/excluir/:id', async (req, res) => {
+    const postagem = await Postagens.findByPk(req.params.id)
+    if (postagem) {
+        postagem.destroy()
+        res.redirect('/perfil')
+    }
+})
+
+router.post('/editar/:id', async (req, res) => {
+    const postagem = await Postagens.findByPk(req.params.id)
+    if (postagem) {
+        postagem.update({
+            titulo: req.body.titulo,
+            mensagem: req.body.mensagem
+        })
+        res.redirect('/perfil')
+    }
+})
+
 export default router;

@@ -1,17 +1,33 @@
-import { DataTypes } from "sequelize";
+import { DataTypes, Model, Sequelize } from "sequelize";
 import { sequelize } from "../config/database";
 import { Usuarios } from "./usuario";
 
-export const Postagens = sequelize.define('postagens', {
+interface PostagemInterface extends Model {
+    id: number;
+    titulo: string;
+    mensagem: string;
+    usuarioID: number;
+}
+
+const Postagens = sequelize.define<PostagemInterface>('postagens', {
+    id: {
+        type: DataTypes.STRING,
+        primaryKey: true,
+        autoIncrement: true
+    },
     titulo: {
         type: DataTypes.STRING,
         allowNull: false
     },
     mensagem: {
-        type:DataTypes.TEXT
+        type: DataTypes.TEXT
+    },
+    usuarioID: {
+        type: DataTypes.INTEGER,
+        allowNull: false
     }
 });
 
-Postagens.belongsTo(Usuarios, { as: 'usuario', foreignKey: 'usuarioId' });
+Postagens.belongsTo(Usuarios, { foreignKey: 'usuarioID', as: 'usuario' });
 
-// Postagens.sync({ force: true })
+export { Postagens };

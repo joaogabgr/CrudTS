@@ -6,11 +6,7 @@ const router = express.Router();
 router.use(bodyParser.urlencoded({ extended: false }));
 
 router.post('/cadastrar', (req, res) => {
-    const nome = req.body.nome;
-    const email = req.body.email;
-    const idade = req.body.idade;
-    const senha = req.body.senha;
-    const confSenha = req.body.confSenha;
+    const { nome, email, idade, senha, confSenha } = req.body;
 
     if (senha === confSenha) {
         Usuarios.create({
@@ -28,6 +24,7 @@ router.post('/cadastrar', (req, res) => {
         res.status(400).send('As senhas não são iguais');
     }
 });
+
 
 router.post('/logar', async (req, res) => {
     const email = req.body.email;

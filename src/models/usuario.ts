@@ -1,7 +1,20 @@
-import { DataTypes } from "sequelize";
+import { DataTypes, Model, Sequelize, ModelCtor } from "sequelize";
 import { sequelize } from "../config/database";
 
-export const Usuarios = sequelize.define('usuarios', {
+export interface UsuariosInterface extends Model {
+    id: number;
+    nome: string;
+    email: string;
+    idade: number;
+    senha: string;
+}
+
+const Usuarios = sequelize.define<UsuariosInterface>('usuarios', {
+    id: {
+        type: DataTypes.INTEGER,
+        primaryKey: true,
+        autoIncrement: true
+    },
     nome: {
         type: DataTypes.STRING,
         allowNull: false
@@ -11,7 +24,7 @@ export const Usuarios = sequelize.define('usuarios', {
         allowNull: false
     },
     idade: {
-        type: DataTypes.STRING,
+        type: DataTypes.INTEGER,
         allowNull: false
     },
     senha: {
@@ -20,4 +33,4 @@ export const Usuarios = sequelize.define('usuarios', {
     }
 });
 
-// Usuarios.sync({ force: true })
+export { Usuarios };
